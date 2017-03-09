@@ -1,7 +1,6 @@
 package com.hanbit.contactsapp.serviceImpl;
 
 import com.hanbit.contactsapp.domain.MemberBean;
-import com.hanbit.contactsapp.service.MemberService;
 
 import java.util.ArrayList;
 import java.util.List;
