@@ -14,21 +14,36 @@ import java.util.List;
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper{
-    final static String DATABASE_NAME="";
+    final static String DATABASE_NAME="hanbit.db";
+    final static Integer DATABASE_VERSION=1;
 
-    public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABASE_NAME, null, version);
+
+
+    public DatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.getWritableDatabase();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql="";
+        String sql="CREATE TABLE IF NOT EXISTS Member(\n" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT \n," +
+                "name TEXT \n," +
+                "phone TEXT \n," +
+                "age TEXT \n," +
+                "address TEXT \n," +
+                "salary TEXT \n " +
+                ");";
         db.execSQL(sql);
+       for(int i=0; i<10; i++){
+            db.execSQL(String.format("INSERT INTO Member(name,phone,age,address,salary) VALUES ('%s','%s','%s','%s','%s'); \n" ,
+                    "홍길동"+i,"010-0000-000"+i,"2","서울",(i+1)+"00"));
+        }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS Memeber");
+        db.execSQL("DROP TABLE IF EXISTS Member");
         onCreate(db);
     }
 

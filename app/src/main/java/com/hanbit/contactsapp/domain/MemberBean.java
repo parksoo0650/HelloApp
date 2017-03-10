@@ -4,15 +4,23 @@ package com.hanbit.contactsapp.domain;
  * Created by hanbit on 2017-03-08.
  */
 
-public class MemberBean {
-    protected String seq, name, phone, addr;
+public class MemberBean extends T{
+    protected String id,name,phone,age,address,salary;
 
-    public String getSeq() {
-        return seq;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setSeq(String seq) {
-        this.seq = seq;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -23,29 +31,27 @@ public class MemberBean {
         this.name = name;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getAge() {
+        return age;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setAge(String age) {
+        this.age = age;
     }
 
-    public String getAddr() {
-        return addr;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddr(String addr) {
-        this.addr = addr;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    @Override
-    public String toString() {
-        return "MemberBean{" +
-                "seq='" + seq + '\'' +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", addr='" + addr + '\'' +
-                '}';
+    public String getSalary() {
+        return salary;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = salary;
     }
 }
