@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.MenuAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class MemberListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_member_list);
         ListView mList = findViewById(R.id.mList);
         final MemberBean member = new MemberBean();
+        mList.setAdapter((new memberAdapter(null ,this)));
         final ArrayList<MemberBean> list=new ArrayList<>();
         findViewById(R.id.btGo).setOnClickListener(new View.OnClickListener(){
 
@@ -77,7 +79,7 @@ public class MemberListActivity extends AppCompatActivity {
             }
             return list;
         }
-        class MemberAdapter extends BaseAdapter{
+        static class MemberAdapter extends BaseAdapter{
             ArrayList<?> list;
             LayoutInflater inflater;
             private int[] photos={
