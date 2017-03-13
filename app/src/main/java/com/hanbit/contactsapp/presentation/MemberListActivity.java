@@ -6,7 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hanbit.contactsapp.R;
@@ -22,6 +28,7 @@ public class MemberListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_list);
+        ListView mList = findViewById(R.id.mList);
         final MemberBean member = new MemberBean();
         final ArrayList<MemberBean> list=new ArrayList<>();
         findViewById(R.id.btGo).setOnClickListener(new View.OnClickListener(){
@@ -70,6 +77,68 @@ public class MemberListActivity extends AppCompatActivity {
             }
             return list;
         }
+        class MemberAdapter extends BaseAdapter{
+            ArrayList<?> list;
+            LayoutInflater inflater;
+            private int[] photos={
+                    R.drawable.cupcake,
+                    R.drawable.donut,
+                    R.drawable.eclair,
+                    R.drawable.froyo,
+                    R.drawable.gingerbread,
+                    R.drawable.honeycomb,
+                    R.drawable.icecream,
+                    R.drawable.jellybean,
+                    R.drawable.kitkat,
+                    R.drawable.lollipop,
+            };
+
+            public MemberAdapter(ArrayList<?> list,Context context) {
+                this.list = list;
+                this.inflater=LayoutInflater.from(context); //풍선을 불 위치 값을 준다.
+            }
+
+            @Override
+            public int getCount() {
+                return 0;
+            }
+
+            @Override
+            public Object getItem(int i) {
+                return list.get(i);
+            }
+
+            @Override
+            public long getItemId(int i) {
+                return i;
+            }
+
+            @Override
+            public View getView(int i,View v,ViewGroup g) {
+                ViewHolder holder;
+                if(v==null){
+                    v=inflater.inflate(R.layout.member_item.null);
+                    holder=new ViewHolder();
+                    holder.profileImg=v.findViewById(R.id.profileImg);
+                    holder.tvName=v.findViewById(R.id.tvName);
+                    holder.tvPhone=findViewById(R.id.tvPhone);
+                }else{
+                    holder= (ViewHolder) v.getTag();
+                }
+                    holder.profileImg.setImageResource(photos[i]);
+                    holder.tvName.setText(((MemberBean)list.get(i)).getName());
+                    holder.tvPhone.setText(((MemberBean)list.get(i)).getName());
+                    return v;
+            }
+
+        }
+
+    }
+    static class ViewHolder{
+        ImageView profileImg;
+        TextView tvName;
+        TextView tvPhone;
+
     }
 }
 
